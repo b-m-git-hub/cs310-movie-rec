@@ -1,12 +1,10 @@
 import pandas as pd
-import numpy as np
 
 file_path = 'processed_movie_data.csv'
 
 def load_data(file_path):
-    #columns = ['id', 'title', 'genres', 'keywords', 'popularity']
+    #columns = ['id', 'title', 'genres', 'keywords', 'popularity', 'similarity']
     movieData = pd.read_csv(file_path) #usecols=columns
-    movieData['similarity'] = np.nan
     return movieData
 
 def main():
