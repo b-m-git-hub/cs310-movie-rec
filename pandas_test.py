@@ -10,12 +10,10 @@ def main():
     _ = parser.add_argument("filename")
     _ = parser.add_argument("--genres",   nargs="+", type=str)
     _ = parser.add_argument("--keywords", nargs="+", type=str)
-    _ = parser.add_argument("--all",      action="store_true")
     args = parser.parse_args()
     filename: str       = args.filename
     genres:   list[str] = args.genres   if args.genres   else []
     keywords: list[str] = args.keywords if args.keywords else []
-    all_terms = args.all
 
     # Read relevant columns from csv, drop NA values.
     df = pd.read_csv(
@@ -51,9 +49,6 @@ def main():
         count = matching_genres + matching_keywords
         # Hacky way to only count movies that match all genres / keywords.
         # Doesn't work well lol.
-        if all_terms:
-            matching_genres   = len_user_genres   if matching_genres   == len_user_genres   else 0
-            matching_keywords = len_user_keywords if matching_keywords == len_user_keywords else 0
         similarity = (
             (matching_genres + matching_keywords) /
                 (len_user_genres + len_user_keywords + len(genres.split(",")) + len(keywords.split(",")) - count)
