@@ -7,11 +7,11 @@ def main():
     # Setup CLI.
     parser = argparse.ArgumentParser()
     _ = parser.add_argument("filename")
-    _ = parser.add_argument("--genres", nargs="+", type=str)
+    _ = parser.add_argument("--genres",   nargs="+", type=str)
     _ = parser.add_argument("--keywords", nargs="+", type=str)
     args = parser.parse_args()
-    filename: str = args.filename
-    genres: list[str] = args.genres
+    filename: str       = args.filename
+    genres:   list[str] = args.genres
     keywords: list[str] = args.keywords
 
     # Read relevant columns from csv, fill na values.
@@ -35,7 +35,7 @@ def main():
 
     # Print top 10 most similar movies.
     df = df.sort_values("similarity", ascending=False)
-    print(df[["id", "title", "similarity"]].head(20))
+    print(df[["id", "title", "similarity"]].head(10))
 
 
 if __name__ == "__main__":
