@@ -86,8 +86,8 @@ def check_streaming_availability(df, provider_names):
             return available_movies
 
 def main():
-    provider_names = ["Disney Plus"]
-    df = pd.read_csv('processed_movie_data.csv')
+    provider_names = input("Enter owned streaming services: ").split(", ")
+    df = 
     recommendations = check_streaming_availability(df, provider_names)
     print(recommendations)
 
