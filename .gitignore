@@ -1,2 +1,4 @@
 *.csv
+.venv/
+pyproject.toml
 __pycache__/
