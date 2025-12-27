@@ -1,0 +1,2 @@
+# CS310 - Movie Recommendation System
+This is a group project for CS310 - Advanced Data Structures and Algorithms at UMass Boston. We were asked to solve a real world problem using algorithms discussed in class. Our group wanted to recommend movies, but only if they were on streaming services the user owned.
