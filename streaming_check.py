@@ -1,6 +1,6 @@
 import requests
 import time
-import pandas as pd
+import pandas_test as pt
 
 # Constants - replace key with TMDB API key
 API_KEY = "key"
@@ -49,8 +49,8 @@ def check_streaming_availability(df, provider_names):
     provider_hashmap = get_provider_map()
     user_provider_ids = convert_name_to_id(provider_names, provider_hashmap)
 
-    # List to store available movies
-    available_movies = []
+    # Dictionary to store available movie titles and streaming services
+    available_movies = {}
     count = 0
 
     # Iterate through each movie in dataframe
@@ -58,6 +58,8 @@ def check_streaming_availability(df, provider_names):
         # Reset availability and select new movie
         available = False
         movie_id = row["id"]
+        movie_title = row["title"]
+        matched_services = []
 
         # API call to check streaming providers for movie
         url = f"https://api.themoviedb.org/3/movie/{movie_id}/watch/providers"
@@ -69,13 +71,22 @@ def check_streaming_availability(df, provider_names):
         streaming_providers = providers.get("flatrate", [])
         
         # Goes through each provider to check if in user list
+        # Adds to matched services if found
+        # Helps user know where to watch the movies
         for provider in streaming_providers:
             if provider["provider_id"] in user_provider_ids:
                 available = True
-                break
-        # Adds movie to available list if matched
+                matched_services.append(provider["provider_name"])
+        
+        # Checks that there is a streaming service for the movie
+        # Adds to dictionary with movie title and streaming services
         if available:
-            available_movies.append(row["title"])
+            available_movies[movie_title] = matched_services
+            
+            # Stops after finding 10 movies
+            # Only returns top 10 movies
+            if len(available_movies) >= 10:
+                return available_movies
 
         count += 1
         # To avoid hitting rate limits
@@ -86,10 +97,26 @@ def check_streaming_availability(df, provider_names):
             return available_movies
 
 def main():
+    # User inputs owned streaming services
     provider_names = input("Enter owned streaming services: ").split(", ")
-    df = 
+
+    # Uses pandas_test to load movie data with similarity scores already added
+    df = pt.main()
+    # Checks streaming availability
     recommendations = check_streaming_availability(df, provider_names)
-    print(recommendations)
+    
+    # Goes through recommendations and prints them with movie name and streaming service
+    for i, (movie, services) in enumerate(recommendations.items()):
+        # Stops after 10 movies found
+        if i >= 10:
+            break
+        
+        # Puts services into a string for printing
+        services_str = ", ".join(services)
+        # Prints formatted output
+        # i+1 for numbering and :2 for alignment (accounts for 10)
+        # <50 for everything to properly align for better readability
+        print(f"{i+1:2}. {movie:<50} Watch on: {services_str}")
 
 if __name__ == "__main__":
     main()
