@@ -3,7 +3,7 @@ import time
 import pandas_test as pt
 
 # Constants - replace key with TMDB API key
-API_KEY = "key"
+API_KEY = "YOUR_API_KEY_HERE"
 REGION = "US"
 
 # Creates hashmap of streaming services string names to IDs

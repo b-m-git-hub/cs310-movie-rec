@@ -63,8 +63,8 @@ def main():
 
     # Print top 10 most similar movies.
     df = df.sort_values("similarity", ascending=False)
-    print(df[["id", "title", "similarity", "genres", "keywords"]].head(10))
-
+    # print(df[["id", "title", "similarity", "genres", "keywords"]].head(10))
+    return df
 
 if __name__ == "__main__":
     main()
