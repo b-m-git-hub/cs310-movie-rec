@@ -6,11 +6,12 @@ We use a CSV file from [Kaggle](https://www.kaggle.com/datasets/asaniczka/tmdb-m
 Users input genre(s) and keyword(s) related to the movie they want to watch
 
 ## How to run it
+Clone the repo:
 ```
-# Clone the repo
 git clone https://github.com/b-m-git-hub/cs310-movie-rec
-
-# Navigate to the repo
+```
+Navigate to the cloned repo:
+```
 cd cs310-movie-rec
 ```
 It is recommended you create a virtual environment before installing dependecies.
@@ -18,6 +19,7 @@ It is recommended you create a virtual environment before installing dependecies
 python -m venv venv
 ```
 Activate the virtual environment.
+
 For Windows:
 ```
 .\venv\Scripts\activate
@@ -31,6 +33,7 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 You must use your own API key from TMDB. It is free to get and can be done by going to the API section of your TMDB account. Check out the [TMDB FAQ](https://developer.themoviedb.org/docs/faq) for more information.
+
 Once you have your key, open the streaming_check.py file and find the line that says API_KEY = "YOUR_API_KEY_HERE". Replace YOUR_API_KEY_HERE with your actual API key. Make sure your API key is inside the quotations and ensure that you save the file.
 
 To run the program and get recommendations:
